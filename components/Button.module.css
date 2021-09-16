@@ -1,0 +1,21 @@
+.button {
+  background-color: tomato;
+  color: white;
+  box-shadow: none;
+  border: none;
+  padding: 0 8px;
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  margin: 0 4px;
+  border-radius: 4px;
+}
+.button:hover {
+  background-color: salmon;
+}
+
+.button:disabled {
+  background-color: grey;
+}

@@ -1,0 +1,45 @@
+fragment UserFields on User {
+  id
+  name
+  status
+  totalFollowers
+  thumbnail
+}
+
+query getLegacyUser($userId: String) {
+  getLegacyUser(userId: $userId) {
+    idNo
+    name
+  }
+}
+
+query getUser($userId: String) {
+  getUser(userId: $userId) {
+    ...UserFields
+  }
+}
+
+query getUserOnlyName($userId: String) {
+  getUser(userId: $userId) {
+    id
+    name
+  }
+}
+
+query getUsers($skip: Int, $take: Int) {
+  getUsers(skip: $skip, take: $take) {
+    ...UserFields
+  }
+}
+
+mutation addFollower($userId: String!) {
+  addFollower(userId: $userId) {
+    ...UserFields
+  }
+}
+
+mutation updateUserName($userId: String!, $name: String!) {
+  updateUserName(userId: $userId, name: $name) {
+    ...UserFields
+  }
+}

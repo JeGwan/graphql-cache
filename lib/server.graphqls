@@ -1,0 +1,24 @@
+type Query {
+  getUser(userId: String): User!
+  getLegacyUser(userId: String): LegacyUser
+  getUsers(skip: Int, take: Int): [User!]!
+}
+
+type Mutation {
+  addFollower(userId: String!): User
+  updateUserName(userId: String!, name: String!): User
+}
+
+type User {
+  id: ID!
+  name: String!
+  status: String!
+  thumbnail: String
+  totalFollowers: Int!
+  createdAt: String # ISO format
+}
+
+type LegacyUser {
+  idNo: String!
+  name: String!
+}
