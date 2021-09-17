@@ -28,23 +28,26 @@ function createIsomorphLink(context: ResolverContext = {}) {
 }
 
 function createApolloClient(context?: ResolverContext) {
-  return new ApolloClient({
-    ssrMode: typeof window === "undefined",
-    link: createIsomorphLink(context),
-    cache: new InMemoryCache({
-      typePolicies: {
-        getUser: {
-          fields: {
-            formattedCreatedAt: {
-              read(existing, options) {
-                console.log(existing);
-                return " - ";
-              },
+  const cache = new InMemoryCache({
+    typePolicies: {
+      getUser: {
+        fields: {
+          formattedCreatedAt: {
+            read(existing, options) {
+              console.log(existing);
+              return " - ";
             },
           },
         },
+        // keyFields:["ID"]
       },
-    }),
+    },
+  });
+  console.log(cache);
+  return new ApolloClient({
+    ssrMode: typeof window === "undefined",
+    link: createIsomorphLink(context),
+    cache,
   });
 }
 

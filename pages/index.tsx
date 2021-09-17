@@ -8,6 +8,7 @@ import PartialUserQuery from "../components/PartialUserQuery";
 import Button from "../components/Button";
 import CashOnlyToDoesnExist from "../components/CashOnlyToDoesnExist";
 import { GetUserQuery } from "../__generated__/lib/client.graphql";
+import LegacyUserByReadHook from "../components/LegacyUserByQueryHook";
 
 interface PageProps {
   userId?: string;
@@ -58,6 +59,7 @@ const Index = ({ userId }: PageProps) => {
       <UserByReadQuery />
       <UserList />
       <PartialUserQuery />
+      <LegacyUserByReadHook />
     </div>
   );
 };
