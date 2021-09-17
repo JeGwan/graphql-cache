@@ -43,7 +43,6 @@ function createApolloClient(context?: ResolverContext) {
       },
     },
   });
-  console.log(cache);
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: createIsomorphLink(context),
