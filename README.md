@@ -40,10 +40,10 @@
 - 크게 두축으로 저장합니다.
   1.  `ROOT_{QUERY|MUTATION}` 으로 쿼리나 뮤테이션의 이름과 결과를 key value pair로 저장합니다.
   2.  normalization 할 수 있는 데이터는 참조로만 두고 최상위 depth로 가져와 따로 저장합니다.
-- 아폴로 클라이언트는 type과 id필드가 있는 데이터에 한해 normalization을 자동으로 해줍니다.
+- 아폴로 클라이언트는 type과 id필드가 있는 데이터에 한해 [normalization](https://www.apollographql.com/docs/react/caching/overview/#2-generate-cache-ids)을 자동으로 해줍니다.
 - 이를 통해 정말 DB처럼 데이터의 중복을 줄이고, nested된 레코드를 오로지 참조만 하게 하여 하나의 데이터를 오로지 하나의 레코드로 관리하게 해줍니다.
-- 핵심은 `__typename` + `id` 로 레코드를 구분한다는 것입니다.
-- 때문에 ID 타입으로 선언하지 않은 녀석들은 캐싱해놔도 다른 곳과 공유가 안됩니다.(정확히 말하면 normalization이 안됩니다. 그래서 한쪽에서 mutation으로 바꿔도 다른 모든 곳에서 그 데이터가 업데이트되지 않습니다.)
+- 핵심은 `__typename` + `id`(or `_id`) 로 레코드를 구분한다는 것입니다.
+- 때문에 `id`가 없는 객체들은 캐싱해놔도 다른 곳과 공유가 안됩니다.(정확히 말하면 normalization이 안됩니다. 그래서 한쪽에서 mutation으로 바꿔도 다른 모든 곳에서 그 데이터가 업데이트되지 않습니다.)
 - 모든 쿼리의 결과가 cache object에 저장됩니다.
 - 뮤테이션의 결과로 type + id를 읽을 수 있으면, 따로 무언갈 하지 않아도 해당 데이터를 업데이트 시켜줍니다.
 
@@ -82,9 +82,9 @@
 
 ![Apollo-3](https://media.oss.navercorp.com/user/25908/files/2a180200-17a2-11ec-8f0b-a40a53dba0be)
 
-1. 정규화를 지켜야 한다. 레코드는 `{__typename}:{id}`로 관리된다는 것을 잊지말자. 하나의 Entity의 PK에 해당하는 ID에 해당 Entity가 묶여있어야한다.(꼭 ID 타입의 필드일 필요는 없다, String 타입의 필드여도 이것이 ID역할을 한다고 `typePolicy`의 `keyField`로 지정해줄 수 있다)
+1. 정규화를 지켜야 한다. 레코드는 `{__typename}:{id}`로 관리된다는 것을 잊지말자. 하나의 Entity의 PK에 해당하는 ID에 해당 Entity가 묶여있어야한다.(꼭 `id` 또는 `_id`일 필요는 없다. `typePolicy`의 `keyField`로 지정해줄 수 있다, https://www.apollographql.com/docs/react/caching/cache-configuration/#customizing-cache-ids)
 
-2. mutation의 결과는 ID를 가진 해당 타입을 리턴하게 => refetch를 선언하지 않고도 자동 반영되버릴 수 있다!
+2. mutation의 결과는 `id`를 가진 해당 타입을 리턴하게 => refetch를 선언하지 않고도 자동 반영되버릴 수 있다!
 
 3. Page에서만 network를 타고 나머지는 cache로\
    context api의 대체 => page에서 페칭, context api 쓰던 하위 컴포넌트는 cache-first로 필요한 데이터 가져오기

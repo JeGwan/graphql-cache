@@ -7,7 +7,6 @@ import { useAddFollowerMutation, useGetUserQuery } from "../lib/client.graphql";
 import PartialUserQuery from "../components/PartialUserQuery";
 import Button from "../components/Button";
 import CashOnlyToDoesnExist from "../components/CashOnlyToDoesnExist";
-import { GetUserQuery } from "../__generated__/lib/client.graphql";
 import LegacyUserByReadHook from "../components/LegacyUserByQueryHook";
 
 interface PageProps {
@@ -67,7 +66,8 @@ const Index = ({ userId }: PageProps) => {
 export const getServerSideProps: GetServerSideProps<PageProps> = async ({
   query,
 }) => {
-  const userId = query.userId as string | undefined;
+  let userId = query.userId as string | undefined;
+  if (!userId) userId = "abcde";
   return {
     props: { userId },
   };

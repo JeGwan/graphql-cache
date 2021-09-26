@@ -30,16 +30,18 @@ function createIsomorphLink(context: ResolverContext = {}) {
 function createApolloClient(context?: ResolverContext) {
   const cache = new InMemoryCache({
     typePolicies: {
-      getUser: {
-        fields: {
-          formattedCreatedAt: {
-            read(existing, options) {
-              console.log(existing);
-              return " - ";
-            },
-          },
-        },
-        // keyFields:["ID"]
+      // getUser: {
+      //   fields: {
+      //     formattedCreatedAt: {
+      //       read(existing, options) {
+      //         console.log(existing);
+      //         return " - ";
+      //       },
+      //     },
+      //   },
+      // },
+      getLegacyUser: {
+        keyFields: ["idNo"],
       },
     },
   });
