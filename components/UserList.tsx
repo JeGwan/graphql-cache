@@ -5,7 +5,6 @@ const UserList = () => {
   const { data, loading, error } = useGetUsersQuery({
     fetchPolicy: "cache-first",
   });
-  console.log(`UserList`, { data, loading, error });
   if (loading) return <div>로딩중..</div>;
   if (!data || error) return <div>에러..!</div>;
   return (

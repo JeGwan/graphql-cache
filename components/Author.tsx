@@ -9,12 +9,11 @@ const Author = () => {
     variables: { userId },
     fetchPolicy: "cache-only",
   });
-  console.log(`Author`, { userId, data, loading, error });
   if (loading) return <div>로딩중..</div>;
   if (!data || error) return <div>에러..!</div>;
   return (
     <div className="comp">
-      <h1 className="title">UserByUserQuery</h1>
+      <h1 className="title">Author</h1>
       👨 {data.getUser.name}
     </div>
   );

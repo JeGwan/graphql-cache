@@ -8,9 +8,7 @@ const UserByUseQuery = () => {
   const userId = router.query.userId as string | undefined;
   const { data, loading, error } = useGetUserQuery({
     variables: { userId },
-    fetchPolicy: "cache-only",
   });
-  console.log(`UserByUserQuery`, { userId, data, loading, error });
   if (loading) return <div>로딩중..</div>;
   if (!data || error) return <div>에러..!</div>;
   const { name, totalFollowers } = data.getUser;

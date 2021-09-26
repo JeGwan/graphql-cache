@@ -12,21 +12,17 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   user: User;
 }
 const UserItem = ({ user }: Props) => {
-  const [addFollowers] = useAddFollowerMutation();
-  const [updateUserName] = useUpdateUserNameMutation();
   const [name, setName] = useState("");
-  const [loading, setLoading] = useState(false);
   const [writeMode, setWriteMode] = useState(false);
+  const [updateUserName] = useUpdateUserNameMutation();
   useEffect(() => {
     setName(user.name);
   }, [writeMode]);
+
+  const [addFollowers] = useAddFollowerMutation();
   const handleFollow = () => {
-    setLoading(true);
     addFollowers({
       variables: { userId: user.id },
-      update: () => {
-        setLoading(false);
-      },
     });
   };
   return (
@@ -61,9 +57,7 @@ const UserItem = ({ user }: Props) => {
           <div>상태 : {user.status}</div>
           <div>
             팔로워 : {user.totalFollowers}{" "}
-            <Button onClick={handleFollow} disabled={loading}>
-              팔로잉
-            </Button>
+            <Button onClick={handleFollow}>팔로잉</Button>
           </div>
         </div>
       </div>

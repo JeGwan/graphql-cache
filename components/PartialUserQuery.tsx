@@ -7,10 +7,8 @@ const PartialUserQuery = () => {
   const router = useRouter();
   const userId = router.query.userId as string | undefined;
   const { data, loading, error } = useGetUserOnlyNameQuery({
-    fetchPolicy: "cache-first",
     variables: { userId },
   });
-  console.log(`PartialUserQuery`, { userId, data, loading, error });
   if (loading) return <div>로딩중..</div>;
   if (!data || error) return <div>에러..!</div>;
   return (

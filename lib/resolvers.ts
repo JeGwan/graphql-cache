@@ -6,8 +6,8 @@ import { LegacyUser, User } from "../__generated__/__types__";
 // 짱구 : https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png/230px-%EC%8B%A0%EC%A7%B1%EA%B5%AC.png
 
 const legacyUsers: LegacyUser[] = [
-  { idNo: "32", name: "우왕😃" },
-  { idNo: "26", name: "좋앙😂" },
+  { idNo: "abcde", name: "우왕😃" },
+  { idNo: "cdefg", name: "좋앙😂" },
 ];
 const users: User[] = [
   {
@@ -37,7 +37,7 @@ const sleep = (duration: number) =>
 const Query: Required<QueryResolvers<ResolverContext>> = {
   async getUser(_parent, { userId }, _context, _info) {
     await sleep(SLEEP_TIME);
-    return users.find((user) => user.id === userId) || users[0];
+    return users.find((user) => user.id === userId);
   },
   async getUsers(_parent, { skip = 0, take = 10 }, _context, _info) {
     await sleep(SLEEP_TIME);

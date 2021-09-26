@@ -10,14 +10,15 @@ import {
 const UserByReadQuery = () => {
   const router = useRouter();
   const client = useApolloClient();
-  const { getUser } = client.readQuery<GetUserQuery>({
+  // 얘는 cache-only나 다름읎듬.. 캐쉬 레이어에 없으믄 에러남!
+  const data = client.readQuery<GetUserQuery>({
     query: GetUserDocument,
     variables: {
       userId: router.query.userId,
     },
   });
-
-  const { totalFollowers, name } = getUser;
+  if (!data?.getUser) return null;
+  const { totalFollowers, name } = data.getUser;
   return (
     <div className="comp">
       <h1 className="title">UserByReadQuery</h1>

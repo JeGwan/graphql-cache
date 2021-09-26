@@ -90,3 +90,34 @@
    context api의 대체 => page에서 페칭, context api 쓰던 하위 컴포넌트는 cache-first로 필요한 데이터 가져오기
 
 4. 구분을 잘하자. 무조건 useQuery로 접근할 필요는 없다. 리스트 하위의 아이템의 경우 이러한 데이터를 props로만 받는게 적합하다.
+
+```json
+{
+  "User:abcde": {
+    "id": "abcde",
+    "__typename": "User",
+    "name": "오제관",
+    "status": "좋음",
+    "totalFollowers": 10,
+    "thumbnail": "https://item.kakaocdn.net/do/a1866850b14ae47d0a2fd61f409dfc057154249a3890514a43687a85e6b6cc82"
+  },
+  "User:cdefg": {
+    "id": "cdefg",
+    "__typename": "User",
+    "name": "홍길동",
+    "status": "나쁨",
+    "totalFollowers": 11,
+    "thumbnail": "https://img1.daumcdn.net/thumb/C500x500.fpng/?fname=http://t1.daumcdn.net/brunch/service/user/6qYm/image/eAFjiZeA-fGh8Y327AH7oTQIsxQ.png"
+  },
+  "ROOT_QUERY": {
+    "__typename": "Query",
+    "getUser({\"userId\":\"abcde\"})": { "__ref": "User:abcde" },
+    "getUsers({})": [{ "__ref": "User:abcde" }, { "__ref": "User:cdefg" }],
+    "getLegacyUser({\"userId\":\"abcde\"})": {
+      "__typename": "LegacyUser",
+      "idNo": "abcde",
+      "name": "우왕😃"
+    }
+  }
+}
+```

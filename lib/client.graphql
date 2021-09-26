@@ -32,6 +32,19 @@ query getUsers($skip: Int, $take: Int) {
   }
 }
 
+query IndexPage($userId: String, $skip: Int, $take: Int) {
+  getUser(userId: $userId) {
+    ...UserFields
+  }
+  getUsers(skip: $skip, take: $take) {
+    ...UserFields
+  }
+  getLegacyUser(userId: $userId) {
+    idNo
+    name
+  }
+}
+
 mutation addFollower($userId: String!) {
   addFollower(userId: $userId) {
     ...UserFields

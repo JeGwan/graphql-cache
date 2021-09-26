@@ -1,6 +1,6 @@
 import { useGetUserQuery } from "../__generated__/lib/client.graphql";
 
-const CashOnlyToDoesnExist = () => {
+const CashOnlyToNotExist = () => {
   const { data, loading, error } = useGetUserQuery({
     fetchPolicy: "cache-only",
     variables: { userId: "22222" },
@@ -18,4 +18,4 @@ const CashOnlyToDoesnExist = () => {
   );
 };
 
-export default CashOnlyToDoesnExist;
+export default CashOnlyToNotExist;
