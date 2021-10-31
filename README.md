@@ -8,7 +8,6 @@
 이를 통해 언제든 어떤 데이터들이 캐쉬되어있는지 볼 수 있고, 가져와 컴포넌트에 뿌려줄 수 있어요.
 
 `__APOLLO_CLIENT__.cache.data.data`
-![image](https://media.oss.navercorp.com/user/25908/files/4bdd9e80-173a-11ec-97b1-d04d1f9797bb)
 
 ## Cache + Normalization = Client-side의 데이터베이스가 되다
 
@@ -54,8 +53,6 @@
 
 ## fetchPolicy와 cache
 
-![Apollo-5](https://media.oss.navercorp.com/user/25908/files/5c772e80-17a5-11ec-93ab-f1b08adeeb90)
-
 - `cache-first`(default) : 캐쉬에 대해 질의 => (있으면) 리턴! => (없으면) 네트워크 질의 => 응답을 캐쉬에 저장 => 리턴!
 - `cache-only` : 캐쉬에 대해 질의 => (있으면) 리턴! => (없으면) throw!
 - `cache-and-network` : 캐쉬에 대해 질의 => (있으면) 일단 리턴! => (있든 없든) 네트워크 질의 => 응답을 캐쉬랑 비교해봄 => 달라졌으면 캐쉬값 업데이트 => 해당 캐쉬를 가져다 쓰는 녀석들 다 업데이트됨!
@@ -79,8 +76,6 @@
 로컬 쿼리를 만들어서 쓰면됩니다! 👉 [여기](https://www.apollographql.com/docs/react/local-state/managing-state-with-field-policies/)
 
 ## 잘 활용하기 위해 지켜야할 것들
-
-![Apollo-3](https://media.oss.navercorp.com/user/25908/files/2a180200-17a2-11ec-8f0b-a40a53dba0be)
 
 1. 정규화를 지켜야 한다. 레코드는 `{__typename}:{id}`로 관리된다는 것을 잊지말자. 하나의 Entity의 PK에 해당하는 ID에 해당 Entity가 묶여있어야한다.(꼭 `id` 또는 `_id`일 필요는 없다. `typePolicy`의 `keyField`로 지정해줄 수 있다, https://www.apollographql.com/docs/react/caching/cache-configuration/#customizing-cache-ids)
 
